@@ -2,9 +2,9 @@
 
 CSS Style Stage Project:
 
-This CSS Project was built during my second semester at Georgian College during my Interface Design with CSS course. 
+This CSS Project was built throughout my Interface Design with CSS course during my second semester at Georgian College.
 
-This project follows the guideline outlined from the original creator and maintainer of the CSS Style Stage project.
+This project follows the guidelines outlined from the original community creator and maintainer of the CSS Style Stage project, Stephanie Eckles.
 
 My ultimate goal was to grow my CSS skills and inspire others to try their hand at the challenge!
 
