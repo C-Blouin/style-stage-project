@@ -19,6 +19,7 @@ There are a few declarations that seem out of place, this was done purposely to 
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
 /* Start of Global Styles */
 
 /* Declare all the colors I'm using as variables in the root */
@@ -42,6 +43,7 @@ html {
   /* Set the base font color of the document to white, but include a default font color of black if any rendering issues occur */
   color: var(--black);
   color: var(--light-text);
+  /* Add some automatic hypens to the page content to increase text readability. */
   hyphens: auto;
 }
 
@@ -433,6 +435,11 @@ article:nth-of-type(3) {
 
 /* Start of About Styles */
 
+/* Using a combinator selector, add some bottom padding to the about and guidelines article content sections. Needed some white space. */
+#about, #guidelines {
+  padding-bottom: 8rem;
+}
+
 /* Target the h2 elements of the first three primary article elements, setting a top margin for white space between sections of content. */
 #about h2,
 #guidelines h2,
@@ -488,6 +495,7 @@ article:nth-of-type(3) {
 /* End of About Styles */
 
 /* Start of Guidelines Article Styles */
+
 
 /* TL;DR text styles from teh guidelines section, display the element as inline block for full DOM control, applied some text decoration styles, and a transform the replicate the original rotate from Stephanie's style stage. */
 #guidelines h3 {
@@ -906,7 +914,7 @@ Grouped all of the elements that involve a transition: transform over 0.3s to av
   padding: 1rem;
   /* Add some white space between the span and anchor elements inside the list item grid with a 0.5rem gap. */
   gap: 0.5rem;
-  /* Add some line spacing for additonal white space and readibility. */
+  /* Add some line spacing for additonal white space and readability. */
   line-height: 1.2;
   background-color: #302d2b;
   width: 8rem;
@@ -981,7 +989,7 @@ Media query to control the featured styles grid elements at a max device width o
   /* 
   Assign each featured grid item card its own grid row since each item now occupies grid-columns 1 / 4 
   
-  This will stack the grid items on top of one another on smaller screens and prevent overflowing a content readibility issues.
+  This will stack the grid items on top of one another on smaller screens and prevent overflowing a content readability issues.
   */
   #styles > .container ul li:nth-of-type(1) {
     grid-row: 1;
@@ -1083,7 +1091,7 @@ Media query to control the featured styles grid elements at a max device width o
   }
 
   /*
-  Reduce the font size of the header h1 and h2 elements at very small device widths to prevent overflow and increase text readibility as the text won't wrap down to a new line.  
+  Reduce the font size of the header h1 and h2 elements at very small device widths to prevent overflow and increase text readability as the text won't wrap down to a new line.  
   */
   header .container h1 {
     font-size: 3rem;
