@@ -10,3 +10,5 @@ My ultimate goal was to grow my CSS skills and inspire others to try their hand 
 
 
 Here is the link to the CSS Style Stage challenge by Stephanie Eckles: https://stylestage.dev/
+
+Here is the link to my live style stage project hosted on GitHub Pages: https://c-blouin.github.io/style-stage-project/
