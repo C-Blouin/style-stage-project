@@ -1,0 +1,1124 @@
+@charset "utf-8";
+
+/* 
+
+Christopher Blouin
+
+Interface Design with CSS - Project 1 Style Stage
+
+
+Throughout building out my project styles, I tried to implement grid and flexbox interchangeably to create unique layout decisions. 
+
+I did my best to organize the stylesheet in the order of the HTML document.
+
+There are a few declarations that seem out of place, this was done purposely to reduce code duplication since I didn't want to declare the same properties and values multiple times throughout the document. 
+
+*/
+
+/* Font Imports for the primary headings, body copy, and ordered list numerics. */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+/* Start of Global Styles */
+
+/* Declare all the colors I'm using as variables in the root */
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --light-black: #131313;
+  --primary-green: #9fad8e;
+  --light-accent-green: #dae2cf;
+  --dark-brown: #302d2b;
+  --light-brown: #413e3c;
+  --light-text: #f0f3eb;
+}
+
+html {
+  /* Set base root font size. */
+  font-size: 112.5%;
+  /* Set a scroll behaviour of smooth so when anchors are clicked the navigation transitions are smooth.*/
+  scroll-behavior: smooth;
+  margin: 0;
+  /* Set the base font color of the document to white, but include a default font color of black if any rendering issues occur */
+  color: var(--black);
+  color: var(--light-text);
+  hyphens: auto;
+}
+
+/* 
+Remove all animations and transitions for people that prefer not to see them.
+
+These styles add accessibility for the end user.
+*/
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* End of Global Styles */
+
+/* 
+Start of Skip Link Styles
+
+Move the Skip Link to the top right of the document using absolute positioning. 
+*/
+.skip-link {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  /* Align the link text, set the font color to white, remove the text decoration as the anchor already looks like a button with the padding and background color. */
+  text-align: center;
+  color: var(--white);
+  text-decoration: none;
+  background-color: var(--dark-brown);
+  padding: 0.75rem;
+  /* Add a transition property that will transform the element over 0.4s when hovered. */
+  transition: transform 0.4s;
+}
+
+/* On skip link hover, change the background and font color of the skip link, also applying the transform: translate property to alter the position of the element on the X and Y axis. */
+.skip-link:hover {
+  background-color: var(--light-accent-green);
+  color: var(--dark-brown);
+  transform: translateX(-0.5rem) translateY(0.5rem);
+}
+
+/* End of Skip Link Styles */
+
+/* Remove margins on the body element, and add white space between text utilizing line-height for text legibility and readability. */
+body {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Start of Heading Styles */
+
+/* 
+Remove the base padding and margins from the heading elements to allow for more individual controls over heading elements later in the cascade.
+
+Set all the heading elements to the primary green in the root styles, and apply the Raleway Font to all headings with web safe font fallbacks in place if rendering of the Display Raleway Font fails.
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+  color: var(--primary-green);
+  font-family: "Raleway", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+/* Adjust heading base font sizes of the h1, h2, h3, and h4 elements */
+h1 {
+  font-size: 4.8rem;
+}
+
+/* Target the article and aside h2 elements, adjust the font sizing and padding. */
+article h2,
+aside h2 {
+  font-size: 3.4rem;
+  padding: 0.5rem 0;
+}
+
+/* Apply a text shadow to the primary article, aside, h3, and h4 headings to provide some contrast of the heading text. */
+article h2,
+aside h2,
+h3,
+h4 {
+  text-shadow: 0.25rem 0.25rem 0.5rem var(--dark-brown);
+}
+
+/* Set the remaining heading fonts using a typographic scale. */
+h3 {
+  font-size: 2.8rem;
+}
+
+h4 {
+  font-size: 2.4rem;
+}
+
+h5 {
+  font-size: 2.1rem;
+}
+
+h6 {
+  font-size: 1.8rem;
+}
+
+/* End of Heading Styles */
+
+/* Set the base paragraph, unordered list items, ordered list items, and anchor font styles to utilize the "Roboto" font-family with a web safe font collection if any rendering issues occur. */
+p,
+ul li,
+ol li,
+a {
+  font-family: "Roboto", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+/* Start of Landing Page Header Styles */
+
+header .container {
+  /* Set the header container to display flex to allow children elements to be adjusted correctly in the flex container. */
+  display: flex;
+  /* Set the flex direction to column, and center the content suing align-items and justify-content. */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Apply a min height of 80vh (viewport height). */
+  min-height: 80vh;
+  background-color: var(--light-black);
+  /* 
+  The Style Stage rules stated I needed to make my images absolute, so I used this SVG to base64 converter to allow for a data url: https://codebeautify.org/svg-to-base64-converter 
+  
+  
+  Learned out data urls here: https://css-tricks.com/lodge/svg/09-svg-data-uris/
+  */
+  background-image: url("data:image/svg+xml;base64, PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNy40LjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCA1MTIuOTAxMTggMzcwLjA3NDE2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIuOTAxMTggMzcwLjA3NDE2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5vd2wtZXllYmFsbHtmaWxsOiM5RkFEOEU7fQ0KCS5vd2wtYm9keXtmaWxsOiMxQTFBMUE7fQ0KPC9zdHlsZT4NCjxnPg0KCTxjaXJjbGUgY2xhc3M9Im93bC1leWViYWxsIiBjeD0iMjU2LjQ1MDU5IiBjeT0iMjM0LjI4NjI0IiByPSI1Ni4xODIxNyIvPg0KCTxjaXJjbGUgY2xhc3M9Im93bC1ib2R5IiBjeD0iMjU2LjQ1MDU5IiBjeT0iMjM0LjI4NjI0IiByPSIyMi41MTg3NSIvPg0KCTxnPg0KCQk8cGF0aCBjbGFzcz0ib3dsLWJvZHkiIGQ9Ik00OTEuMzY4NzcsMTAuNjE5MTljLTAuMzMwNzUtMC43NTQzMi0xLjM5NzE5LTAuNzU0NDgtMS43NDExNS0wLjAwNTgyDQoJCQljLTEzLjYxNTgxLDI5LjY1NTQzLTMyLjcyNDg4LDU2LjI2MjY3LTU2LjAyMDM5LDc4LjUyNjM0YzMuMDM0NDUtMTMuMTcxMDEsNC42Mzg0Ni0yNi44ODg4NCw0LjYzODQ2LTQwLjk4MTM5DQoJCQljMC0xNS4xODc1My0xLjg3Mzg0LTI5LjkzNTYzLTUuMzgyNzItNDQuMDM3M2MtMTEuNjQ2ODIsNDYuODA3MDMtNDEuNDMyMDcsODYuNDQwNjQtODEuNDU5MjMsMTExLjAxMDM1bC0zMS45ODk2Mi02Mi4xODQ2NA0KCQkJYy0wLjMxMTg2LTAuNjA1MzUtMS4xMzg3OS0wLjY5OTc3LTEuNTc4MjgtMC4xODAxNmwtMjAuMDEwNzEsMjMuNjM5NGMtMC40Mzk0NSwwLjUxOTYyLTEuMjY2MzksMC40MjUyOS0xLjU3NzY0LTAuMTgwMTUNCgkJCUwyNTcuMzAwNzIsMC41MTgxYy0wLjM1NTg3LTAuNjkwOC0xLjM0MzA5LTAuNjkwOC0xLjY5ODk5LDBsLTM4Ljk0NzQyLDc1LjcwNzg4DQoJCQljLTAuMzExODksMC42MDUzOC0xLjEzODc1LDAuNjk5NzctMS41NzgyNiwwLjE4MDA1bC0yMC4wMDk0NS0yMy42MzkzYy0wLjQzOTUzLTAuNTE5NjgtMS4yNjY0LTAuNDI1MjktMS41Nzc2MiwwLjE4MDE2DQoJCQlsLTMxLjk5MTEsNjIuMTg0ODJDMTIxLjQ3MDQzLDkwLjU2MjAxLDkxLjY4NTAxLDUwLjkyODI3LDgwLjAzODE5LDQuMTIxMDJjLTMuNTA4ODksMTQuMTAxNjctNS4zODI3NCwyOC44NDk3Ny01LjM4Mjc0LDQ0LjAzNzMNCgkJCWMwLDE0LjA5MjY3LDEuNjAzOTQsMjcuODEwNjMsNC42Mzg1Miw0MC45ODE3NEM1NS45OTkwOSw2Ni44NzcwMiwzNi44OTA1MSw0MC4yNzA1MSwyMy4yNzQ4MiwxMC42MTU5NA0KCQkJYy0wLjM0Mzk3LTAuNzQ5MDQtMS40MTE2NS0wLjc0OTA0LTEuNzQzMDMsMC4wMDU2NkMxLjA2ODM3LDU3LjIyMzkzLTUuOTQ3MDUsMTExLjA2OTE3LDUuNDQ0MTUsMTY3LjI1NzQ1DQoJCQljMjAuMTEwNjcsOTkuMTk5NDMsOTguMDUzMjgsMTc3LjIxNDM2LDE5Ny4yNDcxOSwxOTcuMzUyMTRjMTY1LjE1MTEyLDMzLjUyODA4LDMxMC4yMDk4NC05MS43ODg4OCwzMTAuMjA5ODQtMjUwLjk4NjAxDQoJCQlDNTEyLjkwMTE4LDc2Ljk4NTQyLDUwNS4yMTE2MSw0Mi4xNDQ5Niw0OTEuMzY4NzcsMTAuNjE5MTl6IE0yNTYuNDUwNTksMzE3LjcxMjU5DQoJCQljLTUwLjI2OTQ3LDAtOTEuMDIwODctNDAuNzUxNS05MS4wMjA4Ny05MS4wMjEwOWMwLTYuODMxMywwLjc1ODIyLTEzLjQ4NDczLDIuMTg0OTQtMTkuODg2MDgNCgkJCWMyNi4yNjg3OCwxNC43NDEwMyw1Ni41NzAyOCwyMy4xNDgwNCw4OC44MzU5MSwyMy4xNDgwNHM2Mi41NjcyLTguNDA3MDEsODguODM1OTctMjMuMTQ4MDcNCgkJCWMxLjQyNjc2LDYuNDAxMzgsMi4xODQ5NywxMy4wNTQ4MSwyLjE4NDk3LDE5Ljg4NjExQzM0Ny40NzE1LDI3Ni45NjEwOSwzMDYuNzIwMDYsMzE3LjcxMjU5LDI1Ni40NTA1OSwzMTcuNzEyNTl6Ii8+DQoJPC9nPg0KPC9nPg0KPC9zdmc+DQo=");
+  /* Set background properties of no repeat to render a single svg image, set the sizing to contain to maintain image proportions. */
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* Set the background position to center to allow the image to dynamically center itself in the parent container element. */
+  background-position: center;
+  /* Apply a fixed attachment to the background image to allow the image to adjust it's position based on the viewport position. */
+  background-attachment: fixed;
+}
+
+/* Set the primary heading font size and color using the root color variables. */
+header .container h1 {
+  font-size: 8rem;
+  color: var(--primary-green);
+}
+
+/* Header h2 styles ("A modern CSS showcase styled by community contributions"), added background color, border styles, border radius alterations, margins, padding. */
+header h2 {
+  background-color: var(--light-accent-green);
+  border-top: 0.3rem dotted var(--light-brown);
+  border-top-right-radius: 10rem;
+  border-bottom-left-radius: 10rem;
+  color: var(--black);
+  font-size: 2rem;
+  margin: 0 2rem 1rem 2rem;
+  padding: 0.5rem 4rem;
+  text-align: center;
+}
+
+/* Add some white space between the header paragraph and github anchor elements. */
+header p,
+header a.link-github {
+  margin-bottom: 1rem;
+  font-size: 1.2em;
+  color: var(--white);
+}
+
+/* Set the header anchors nested inside paragraph elements to the primary green. */
+header p a {
+  color: var(--primary-green);
+}
+
+/* Base anchor styles if not overwritten by the cascade. */
+a {
+  color: var(--light-accent-green);
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: 2px underline;
+}
+
+/* Add some accessibility to the anchor links using a thick underline to signify to the user that they are hovering on a hyperlink */
+article p a:hover {
+  text-decoration: 5px underline;
+}
+
+/* 
+Change the text decoration of the anchors in the light brown colored sections, setting the anchor color to dark brown from the root colors. 
+
+Changing the decoration allows the user some notice of the element they are hovering on.
+*/
+#about p a:hover,
+#contribute p a:hover,
+#contribute ol li a:hover {
+  text-decoration: 5px underline var(--dark-brown);
+}
+
+/* 
+Change the text decoration of the anchors in the dark brown colored sections, header, and footer elements, setting the anchor color to light-text from the root colors. 
+*/
+#guidelines p a:hover,
+#guidelines a:hover,
+.page-footer p a:hover,
+header p a:hover {
+  text-decoration: 5px underline var(--light-text);
+}
+
+/* Header and footer anchor button styles, bundled them together so there is less repetition in the code. */
+header a.link-github,
+.page-footer ul li a {
+  margin: 1rem 0 9rem 0;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--light-accent-green);
+  color: var(--black);
+  text-decoration: none;
+  border-bottom-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+}
+
+/* Add a transform to the header github anchor element. */
+header a.link-github {
+  transition: transform 0.5s;
+}
+
+/* Add a transform to the github link when hovered, changing the content position on the Y axis. */
+header a.link-github:hover {
+  transform: translateY(0.35rem);
+}
+
+/* Header and footer a button element styles, add contrasting colors and box shadow. */
+header a.link-github:hover,
+.page-footer ul li a:hover {
+  color: var(--light-accent-green);
+  background-color: var(--dark-brown);
+  box-shadow: 0.3rem 0.3rem var(--primary-green);
+}
+
+/* Target the github anchor links with a class attribute which contains the string keyword of "link" containing an svg element. */
+[class^="link"] svg {
+  height: 1.5rem;
+  /* Align the svg vertically to the child elements, the anchor tag */
+  vertical-align: middle;
+  margin-right: 0.2rem;
+  /* Fill the svg image with light brown from the root variables. */
+  fill: var(--light-brown);
+}
+
+/* Change the svg fill color to the light-accent-green when the anchor element is hovered over. */
+[class^="link"]:hover svg {
+  fill: var(--light-accent-green);
+}
+
+/* End of Landing Page Header Styles */
+
+/* Start of Navigation Styles */
+
+nav {
+  /* Set a border to the top of the navigation bar to add some contrast through creating a content divider. */
+  border-top: solid 3px var(--primary-green);
+  /* Set the position of the navigation to sticky, it will stay at the top of the viewport when the top of the viewport touches the navigation (Since it is sticky, it follow the viewport as it's scrolled.) */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--dark-brown);
+  padding: 0.05rem 0px;
+}
+
+/* Display the nav unordered list as flex to allow the children li elements to become flexible. */
+nav ul {
+  display: flex;
+  /* Set flex wrap to prevent content overflow. */
+  flex-wrap: wrap;
+  /* Center the unordered list with justify content. */
+  justify-content: center;
+  /* Add some white space with the gap property. */
+  gap: 3rem;
+  padding: 0.25rem;
+  margin: 2rem 0;
+  /* Remove the list style bullet points. */
+  list-style: none;
+}
+
+/* ul li anchor styles. */
+nav ul li a {
+  /* Remove anchor underline. */
+  text-decoration: none;
+  color: var(--light-accent-green);
+  font-weight: bold;
+  letter-spacing: 0.075rem;
+  /* Add a transition with a transform over 0.4 seconds. */
+  transition: transform 0.4s;
+  font-size: 1.1rem;
+}
+
+nav ul li {
+  /* Add a transition to the nav ul li elements with a transform over 0.3 seconds. */
+  transition: transform 0.3s;
+}
+
+/* Apply an transform to the hover li elements to position off the X axis -0.3rem */
+nav ul li:hover {
+  letter-spacing: 0.075rem;
+  transform: translateX(-0.3rem);
+}
+
+/* Change li anchor font color to the root color white. */
+nav ul li a:hover {
+  color: var(--white);
+}
+
+/* Using the after pseudo element on the ul li a elements, add empty content displayed as block that will be displayed on hover later. */
+nav ul li a::after {
+  content: "";
+  width: 0px;
+  height: 0.1rem;
+  display: block;
+}
+
+/* Add transition of 0.3 seconds to the all base li elements, hovered li elements, and after pseudo elements using a combination selector.  */
+nav ul li,
+nav ul li a:hover,
+nav ul li a::after {
+  transition: 0.3s;
+}
+
+/* When the nav ul li anchor is hovered, display the after element content declared above to display at 100% width under the anchor element with a light accent green underline transition. */
+nav ul li a:hover::after {
+  width: 100%;
+  background-color: var(--light-accent-green);
+}
+
+/* End of Navigation Styles */
+
+/* Base padding to all article elements. */
+article {
+  padding: 0 2rem;
+}
+
+/* Justify the primary copy text throughout the html paragraphs and ol li elements. */
+article p,
+ol li {
+  text-align: justify;
+}
+
+/* Setting the Stage & Modern CSS Under The Spotlight Section */
+
+#about {
+  /* Inserting another data url with my leaf vector */
+  background-image: url("data:image/svg+xml;base64, PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNy40LjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAzNjkuNiAyODQuNiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzY5LjYgMjg0LjY7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiMzMDJEMkI7fQ0KPC9zdHlsZT4NCjxnPg0KCTxnPg0KCQk8Zz4NCgkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zMDEuMSwzNi42Yy0yMy42LDkuNi00Ni41LDIxLTY4LjEsMzQuNWMtMzAuNywxOS4xLTU4LjcsNDMtNzkuNSw3Mi44Yy05LjQsMTMuNC0xNy4yLDI3LjktMjYuNCw0MS41DQoJCQkJYy0zLjksNS44LTEwLDEzLjItMTYuNCwxOS42Yy04LjcsOC43LTI3LjEsMjMuOS02MS4xLDMxLjRjLTAuMSwwLTAuMSwwLjEsMCwwLjFjMTguNSwwLjYsNDYuNC0wLjgsNzcuMi0xMg0KCQkJCWMyMC45LTcuNiw0MC40LTE4LjcsNTgtMzIuM2MxOS45LTE1LjQsMzcuMy0zMy44LDUyLjQtNTMuOGMxNS4zLTIwLjEsMjcuMS00Mi42LDQxLjMtNjMuNkMyODQuMSw2Ni40LDI5MCw1OC4xLDI5Niw1MA0KCQkJCWMyLTIuNywxMC4yLTE0LjMsMTQuNS0xNS4xYzAuMSwwLDAuMS0wLjEsMC0wLjFDMzA3LjIsMzQuMywzMDQuMSwzNS4zLDMwMS4xLDM2LjZ6IE0yMjQuNiwxMDQuNWMtMTYuNiwxNi4zLTI4LjgsMzUuOC00My4yLDUzLjkNCgkJCQljLTE5LjIsMjQuMS00NC44LDQxLjgtNzQuMyw1MC44Yy0wLjUsMC4yLTEsMC4zLTEuNSwwLjVjMC41LTAuMiwxLTAuMywxLjUtMC41YzMwLjktOS43LDU1LjktMzYuNiw3NS02MS41DQoJCQkJYzE4LTIzLjUsMzkuMi00OS44LDY1LjktNjRjMS41LTAuOCwzLjQtMS4zLDQuOC0yLjJDMjQwLjQsOTAsMjMxLjEsOTguMiwyMjQuNiwxMDQuNXoiLz4NCgkJPC9nPg0KCTwvZz4NCjwvZz4NCjwvc3ZnPg0K");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+/* Set a fixed width to all the primary section elements. */
+#about > section,
+#guidelines > section,
+#contribute > section {
+  max-width: 55rem;
+  /* Set a margin 0 on the top and bottom, and auto left and right margins to keep the content centered in the section containers. */
+  margin: 0 auto;
+}
+
+/* Target the first and third article elements, setting the background to light brown from the root colors. */
+article:nth-of-type(1),
+article:nth-of-type(3) {
+  background-color: var(--light-brown);
+}
+
+/* Target the second article element and set the background color to dark brown from the root colors. */
+article:nth-of-type(2) {
+  background-color: var(--dark-brown);
+}
+
+/* Add white space to the bottom of each article element with padding. */
+article:nth-of-type(1),
+article:nth-of-type(2),
+article:nth-of-type(3) {
+  padding-bottom: 2rem;
+}
+
+/* Start of About Styles */
+
+/* Target the h2 elements of the first three primary article elements, setting a top margin for white space between sections of content. */
+#about h2,
+#guidelines h2,
+#contribute h2 {
+  margin-top: 4rem;
+}
+
+/* Target the first section of each article element using the associated id of each article, set the padding on the top and bottom to 2rem */
+#about > section:nth-of-type(1),
+#guidelines > section:nth-of-type(1),
+#contribute > section:nth-of-type(1) {
+  padding: 2rem 0;
+}
+
+/* Remove all padding from the second section of the about article setting the value to 0. */
+#about > section:nth-of-type(2) {
+  padding: 0;
+}
+
+/* Display the #about article ul as a flex container to allow the children li elements to display flexibly. */
+#about > section:nth-of-type(2) ul {
+  display: flex;
+  /* Wrap the flex items to prevent overflow */
+  flex-wrap: wrap;
+  /* Center all the flex item content. */
+  justify-content: center;
+  /* Add a slight gap to the ul children elements. */
+  gap: 1.2rem;
+  margin: 2rem 0;
+  /* Remove base padding of the ul element. */
+  padding: 0;
+  /* Remove the bullet decoration from the list item. */
+  list-style: none;
+}
+
+/* Styles for the flex unordered list children elements. */
+#about > section:nth-of-type(2) ul li {
+  padding: 0.5rem 0.75rem;
+  /* Set base contrasting colors from the root colors. */
+  background-color: var(--primary-green);
+  color: var(--black);
+  /* Add a slight inset box shadow. */
+  box-shadow: inset 3px 4px 6px rgba(37, 37, 37, 0.35);
+}
+
+/* On hover of each of the #about article ul li flex items, translate the elements position on the Y axis and alter the background color to light green from the root colors. */
+#about > section:nth-of-type(2) ul li:hover {
+  background-color: var(--light-accent-green);
+  transform: translateY(-0.2rem);
+  cursor: pointer;
+}
+
+/* End of About Styles */
+
+/* Start of Guidelines Article Styles */
+
+/* TL;DR text styles from teh guidelines section, display the element as inline block for full DOM control, applied some text decoration styles, and a transform the replicate the original rotate from Stephanie's style stage. */
+#guidelines h3 {
+  display: inline-block;
+  font-size: 1.8rem;
+  color: var(--light-accent-green);
+  text-decoration: underline 0.5rem solid var(--light-brown);
+  transform: rotate(340deg) translateX(-30%);
+  margin-bottom: 1rem;
+}
+
+/* End of Guidelines Article Styles */
+
+/* Start of Contribute Article Styles */
+
+/* Display the ordered list element in the contribute article to grid */
+#contribute > section:nth-of-type(2) > ol {
+  padding-top: 2rem;
+  display: grid;
+  /* Create 4 grid columns of equal width using 1 fractional unit. */
+  grid-template-columns: repeat(4, 1fr);
+  /* Add a top/bottom gap of 3rem, and left/right gap of 5rem. */
+  gap: 3rem 5rem;
+  /* Overwrite the ordered list > list style to decimal leading zero. eg. 01, 02, 03 */
+  list-style: decimal-leading-zero;
+}
+
+/* Target the list item marker of the ordered list, setting the color of the marker to the primary green in the root colors. */
+#contribute > section:nth-of-type(2) > ol > li::marker {
+  font-size: 2rem;
+  color: var(--primary-green);
+  /* Add a slight drop shadow to the li elements. */
+  text-shadow: 0 0 0.2rem var(--dark-brown);
+  font-family: "Lobster", cursive;
+}
+
+/* Set the first and second li elements to occupy the first grid row and span over the 4 evenly created columns */
+#contribute > section:nth-of-type(2) > ol > li:nth-of-type(1) {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+#contribute > section:nth-of-type(2) > ol > li:nth-of-type(2) {
+  grid-column: 3 / 5;
+  grid-row: 1;
+}
+
+/* Set the third and fourth li elements to occupy the second grid row and span over the 4 evenly created columns */
+#contribute > section:nth-of-type(2) > ol > li:nth-of-type(3) {
+  grid-column: 1 / 3;
+  grid-row: 2;
+}
+
+#contribute > section:nth-of-type(2) > ol > li:nth-of-type(4) {
+  grid-column: 3 / 5;
+  grid-row: 2;
+}
+
+/* Media query to render the declared properties differently when the devices max-width is 900px wide. */
+@media screen and (max-width: 900px) {
+  /* Set lower min-height and padding to the header container to render elements correctly on smaller devices.*/
+  header .container {
+    min-height: 60vh;
+    padding: 5rem 2rem;
+  }
+
+  /* Reducethe header h1 elment to fit proportionally based on the screen width of 900px */
+  header .container h1 {
+    font-size: 5rem;
+    padding: 1rem 0;
+  }
+
+  /* Remove the border, background color, and margin/padding to prevent overflow of content. */
+  header .container h2 {
+    border: none;
+    /* Remove the desktop view green background when viewing on smaller screens. */
+    background-color: transparent;
+    color: var(--light-text);
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Reduce the header anchor element "GitHub Star Button" bottom margin, to prevent the viewport height from being too large on smaller screens. */
+  header a.link-github {
+    margin-bottom: 5rem;
+  }
+
+  /* Adjust the article, aside, h2 , h3, and h4 headings font size when viewing on smaller device widths. */
+  article h2,
+  aside h2 {
+    font-size: 2.4rem;
+  }
+
+  h3 {
+    font-size: 2.1rem;
+  }
+
+  h4 {
+    font-size: 2.1rem;
+    text-align: center;
+  }
+
+  /* Add a slight vertical gap on the ordered flex list. */
+  #contribute > section:nth-of-type(2) > ol {
+    gap: 2rem 0;
+  }
+
+  /* Reduce the upper roman list marker font size for smaller screens. */
+  #contribute > section:nth-of-type(2) > ol > li::marker {
+    font-size: 1.4rem;
+  }
+
+  /* Adjust the four-square two column card layout to a single column layout when viewing on smaller devices. */
+  #contribute > section:nth-of-type(2) > ol > li:nth-of-type(1),
+  #contribute > section:nth-of-type(2) > ol > li:nth-of-type(2),
+  #contribute > section:nth-of-type(2) > ol > li:nth-of-type(3),
+  #contribute > section:nth-of-type(2) > ol > li:nth-of-type(4) {
+    grid-column: 1 / 5;
+  }
+
+  /* Each li in the ordered list will ocupy it's own grid row to stack vertically. */
+  #contribute > section:nth-of-type(2) > ol > li:nth-of-type(1) {
+    grid-row: 1;
+  }
+
+  #contribute > section:nth-of-type(2) > ol > li:nth-of-type(2) {
+    grid-row: 2;
+  }
+
+  #contribute > section:nth-of-type(2) > ol > li:nth-of-type(3) {
+    grid-row: 3;
+  }
+  #contribute > section:nth-of-type(2) > ol > li:nth-of-type(4) {
+    grid-row: 4;
+  }
+
+  /* Adjust the page footer paragraph white space at max device width of 900px */
+  .page-footer p {
+    padding: 0 2rem;
+  }
+}
+
+/* End of Contribute Article Styles */
+
+/* Start of Contribute Files Styles */
+
+/* Display the files article element as grid and center the items vertically and horizontally while applying automatic margins for scalability. */
+#files {
+  display: grid;
+  justify-content: center;
+  margin: 6rem auto;
+  text-align: center;
+}
+
+/* Display the article container element to in-block to allow for full control of the element in the DOM. */
+#files .container {
+  display: inline-block;
+  text-align: center;
+}
+
+#files h3 {
+  margin-bottom: 1.6rem;
+}
+
+/* Inline flex on the first two anchors to allow them to sit side by side. */
+#files .container > .link-downloadcss,
+#files .container > .link-downloadhtml {
+  /* Allow the CSS Download, HTML Download button to sit horizontally together. */
+  display: inline-flex;
+  /* Align the flex content vertically and horizontally. */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  /* Set a fixed width to the anchor element blocks. */
+  width: 10rem;
+  background-color: var(--light-accent-green);
+  color: var(--light-black);
+  /* Add white space to the top of the download anchor buttons. */
+  margin-top: 2rem;
+}
+
+/* Add a margin right to the download css button the create a gap between the two download buttons. */
+#files .container > .link-downloadcss {
+  margin-right: 2rem;
+}
+
+/* Set the last link of the file link container as block to nudge it underneath the two inline-flex anchors. */
+#files .container > .link-codepen {
+  margin-top: 5rem;
+  display: block;
+}
+
+/* Remove the default anchor text underline of the two CSS and HTML anchors in the files article element. */
+#files .container > .link-downloadcss,
+#files .container > .link-downloadhtml {
+  text-decoration: none;
+}
+
+/* Add a slight box shadow to each of the download buttons. */
+#files .container > .link-downloadcss,
+#files .container > .link-downloadhtml {
+  box-shadow: 0.1rem 0.1rem 0.2rem var(--primary-green);
+}
+
+/* Add a left position transform on hover to the Download CSS button by setting the transform property to translate the X axis -2rem */
+#files .container > .link-downloadcss:hover {
+  transform: translateX(-2rem);
+}
+
+/* Add a right position transform on hover to the Download HTML button by setting the transform property to translate the X axis 2rem */
+#files .container > .link-downloadhtml:hover {
+  transform: translateX(2rem);
+}
+
+/* End of Contribute Files Styles */
+
+/* Start of Profile Aside Styles */
+
+/* Target the aside element with class .profile, set a min height of 40 viewport height and display the content elements as flex. */
+.profile {
+  min-height: 40vh;
+  display: flex;
+  /* Center the flex items vertically and horizontally */
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dark-brown);
+  /* Add some top and bottom paddin the the aside .profile element */
+  padding: 5rem 0;
+}
+
+/* Display the aside profile container as flex and set the felx direction to column to allow the container children elements to stack vertically. */
+.profile > .container {
+  display: flex;
+  flex-direction: column;
+  /* Add a slight gap to the flex items to create white space. */
+  gap: 2rem;
+}
+
+/* Target the profile aside h4 element with id #profile-title, display the content as flex and center the content horizontally with justify-content. */
+#profile-title {
+  display: flex;
+  justify-content: center;
+}
+
+/* Set base font styles of the aside with class .profile unordered list elements. */
+.profile ul li {
+  font-size: 1.2rem;
+  padding: 2rem 2rem;
+  background-color: var(--light-brown);
+  box-shadow: 5px 5px var(--primary-green);
+}
+
+/* Add hover styles to the .profile unordered list elements containg a scale transform to increase the elements size on hover, and a translate transform to alter the position of the element on hover. */
+.profile ul li:hover {
+  transform: scale(1.1);
+  transform: translateX(-0.5rem) translateY(-0.5rem);
+  background-color: var(--primary-green);
+  box-shadow: 5px 5px var(--light-brown);
+}
+
+/* Change the font color of the profile unordered list items when hovered over to provide contrast to the background color change. */
+.profile ul li:hover,
+.profile ul li:hover a {
+  color: var(--light-black);
+}
+
+/* Set the first span child of each profile class list item to font weight bold.  */
+.profile-title span:nth-child(1),
+.profile-author span:nth-child(1),
+.profile-twitter span:nth-child(1),
+.profile-website span:nth-child(1) {
+  font-weight: bold;
+}
+
+/* 
+Target the profile anchor with an href attribute exactly equal to the file path in the anchor. 
+
+Grouped all of the elements that involve a transition: transform over 0.3s to avoid code duplication.
+*/
+.profile ul li,
+.profile > div a[href="/styles/css/main-stage.css"],
+.link-codepen,
+#files .container > .link-downloadcss,
+#files .container > .link-downloadhtml,
+.link-allstyles,
+#about > section:nth-of-type(2) ul li {
+  transition: transform 0.3s;
+}
+
+/* Target all li and anchor elements using a combinator selector, when hovered will translate the element position on the X and Y axis -0.5rem*/
+.profile ul li:hover,
+.profile > div a[href="/styles/css/main-stage.css"]:hover,
+.link-codepen:hover,
+.link-allstyles:hover {
+  transform: translateX(-0.5rem) translateY(-0.5rem);
+}
+
+/* Target the profile anchor that contains an href attribute exactly equal to href file path "/styles/css/main-stage.css" */
+.profile > div a[href="/styles/css/main-stage.css"] {
+  margin-top: 1rem;
+}
+
+/* Target the  */
+.profile > div a[href="/styles/css/main-stage.css"]:hover,
+.link-allstyles:hover,
+#files .container > .link-codepen:hover {
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* Remove default padding of the unordered list to allow elements to center correctly. */
+.profile > .container ul {
+  padding: 0;
+}
+
+/* Display the unordered list in the profile section as flex with a flex wrap and centered content. */
+.profile > .container ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /* Add a gap between the ul children elements. */
+  gap: 2rem;
+}
+
+/* Set the children anchor elements in the profile container to flex to center the content within the parent ul li container */
+.profile > .container > a {
+  display: flex;
+  justify-content: center;
+}
+
+/* End of Profile Aside Styles */
+
+/* Start of Featured Aside Styles */
+
+/* Set background of the styles aside element to light brown from the root color declarations. */
+#styles {
+  background-color: var(--light-brown);
+}
+
+/* Set a slight top margin of the styles aside h2 element to maintain consistent white space of the primary content sections. */
+#styles h2 {
+  margin-top: 2rem;
+}
+
+/* Set a minimum width to the styles aside element to allow the automatic margin to center the content correctly. */
+#styles > .container {
+  text-align: center;
+  padding: 3rem 3rem 5rem 3rem;
+  min-width: 75%;
+  margin: 0 auto;
+}
+
+/* Set the styles aside element container ul to display grid, creating 3 columns to hold each li card element. */
+#styles > .container ul {
+  /* Remove default padding on the ul element. */
+  padding: 0;
+  /* Remove list style bullet points */
+  list-style: none;
+  display: grid;
+  /* Create equal fraction columns, 3 columns at 1 fractional unit each. */
+  grid-template-columns: repeat(3, 1fr);
+  /* Slight gap between each column card. */
+  gap: 1rem;
+  padding: 3rem 0;
+}
+
+#styles > .container ul li {
+  padding: 5rem;
+  transition: all 0.4s;
+  /* Inserting my final SVG data url here. */
+
+  /* Set a fallback color to the li elements in the style aside. */
+  background-color: var(--light-accent-green);
+  /* Apply a radial gradient to provide contrast to the surrounding typography and font colors, as well as add a smooth overlay to the background vector graphic. */
+  background: radial-gradient(
+      circle,
+      rgba(218, 226, 207, 0.98) 0%,
+      rgba(220, 227, 211, 0.75) 100%
+    ),
+    url("data:image/svg+xml;base64, PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNy40LjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCA1MTIuOTAxMTggMzcwLjA3NDE2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIuOTAxMTggMzcwLjA3NDE2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5vd2wtZXllYmFsbHtmaWxsOiM5RkFEOEU7fQ0KCS5vd2wtYm9keXtmaWxsOiMxQTFBMUE7fQ0KPC9zdHlsZT4NCjxnPg0KCTxjaXJjbGUgY2xhc3M9Im93bC1leWViYWxsIiBjeD0iMjU2LjQ1MDU5IiBjeT0iMjM0LjI4NjI0IiByPSI1Ni4xODIxNyIvPg0KCTxjaXJjbGUgY2xhc3M9Im93bC1ib2R5IiBjeD0iMjU2LjQ1MDU5IiBjeT0iMjM0LjI4NjI0IiByPSIyMi41MTg3NSIvPg0KCTxnPg0KCQk8cGF0aCBjbGFzcz0ib3dsLWJvZHkiIGQ9Ik00OTEuMzY4NzcsMTAuNjE5MTljLTAuMzMwNzUtMC43NTQzMi0xLjM5NzE5LTAuNzU0NDgtMS43NDExNS0wLjAwNTgyDQoJCQljLTEzLjYxNTgxLDI5LjY1NTQzLTMyLjcyNDg4LDU2LjI2MjY3LTU2LjAyMDM5LDc4LjUyNjM0YzMuMDM0NDUtMTMuMTcxMDEsNC42Mzg0Ni0yNi44ODg4NCw0LjYzODQ2LTQwLjk4MTM5DQoJCQljMC0xNS4xODc1My0xLjg3Mzg0LTI5LjkzNTYzLTUuMzgyNzItNDQuMDM3M2MtMTEuNjQ2ODIsNDYuODA3MDMtNDEuNDMyMDcsODYuNDQwNjQtODEuNDU5MjMsMTExLjAxMDM1bC0zMS45ODk2Mi02Mi4xODQ2NA0KCQkJYy0wLjMxMTg2LTAuNjA1MzUtMS4xMzg3OS0wLjY5OTc3LTEuNTc4MjgtMC4xODAxNmwtMjAuMDEwNzEsMjMuNjM5NGMtMC40Mzk0NSwwLjUxOTYyLTEuMjY2MzksMC40MjUyOS0xLjU3NzY0LTAuMTgwMTUNCgkJCUwyNTcuMzAwNzIsMC41MTgxYy0wLjM1NTg3LTAuNjkwOC0xLjM0MzA5LTAuNjkwOC0xLjY5ODk5LDBsLTM4Ljk0NzQyLDc1LjcwNzg4DQoJCQljLTAuMzExODksMC42MDUzOC0xLjEzODc1LDAuNjk5NzctMS41NzgyNiwwLjE4MDA1bC0yMC4wMDk0NS0yMy42MzkzYy0wLjQzOTUzLTAuNTE5NjgtMS4yNjY0LTAuNDI1MjktMS41Nzc2MiwwLjE4MDE2DQoJCQlsLTMxLjk5MTEsNjIuMTg0ODJDMTIxLjQ3MDQzLDkwLjU2MjAxLDkxLjY4NTAxLDUwLjkyODI3LDgwLjAzODE5LDQuMTIxMDJjLTMuNTA4ODksMTQuMTAxNjctNS4zODI3NCwyOC44NDk3Ny01LjM4Mjc0LDQ0LjAzNzMNCgkJCWMwLDE0LjA5MjY3LDEuNjAzOTQsMjcuODEwNjMsNC42Mzg1Miw0MC45ODE3NEM1NS45OTkwOSw2Ni44NzcwMiwzNi44OTA1MSw0MC4yNzA1MSwyMy4yNzQ4MiwxMC42MTU5NA0KCQkJYy0wLjM0Mzk3LTAuNzQ5MDQtMS40MTE2NS0wLjc0OTA0LTEuNzQzMDMsMC4wMDU2NkMxLjA2ODM3LDU3LjIyMzkzLTUuOTQ3MDUsMTExLjA2OTE3LDUuNDQ0MTUsMTY3LjI1NzQ1DQoJCQljMjAuMTEwNjcsOTkuMTk5NDMsOTguMDUzMjgsMTc3LjIxNDM2LDE5Ny4yNDcxOSwxOTcuMzUyMTRjMTY1LjE1MTEyLDMzLjUyODA4LDMxMC4yMDk4NC05MS43ODg4OCwzMTAuMjA5ODQtMjUwLjk4NjAxDQoJCQlDNTEyLjkwMTE4LDc2Ljk4NTQyLDUwNS4yMTE2MSw0Mi4xNDQ5Niw0OTEuMzY4NzcsMTAuNjE5MTl6IE0yNTYuNDUwNTksMzE3LjcxMjU5DQoJCQljLTUwLjI2OTQ3LDAtOTEuMDIwODctNDAuNzUxNS05MS4wMjA4Ny05MS4wMjEwOWMwLTYuODMxMywwLjc1ODIyLTEzLjQ4NDczLDIuMTg0OTQtMTkuODg2MDgNCgkJCWMyNi4yNjg3OCwxNC43NDEwMyw1Ni41NzAyOCwyMy4xNDgwNCw4OC44MzU5MSwyMy4xNDgwNHM2Mi41NjcyLTguNDA3MDEsODguODM1OTctMjMuMTQ4MDcNCgkJCWMxLjQyNjc2LDYuNDAxMzgsMi4xODQ5NywxMy4wNTQ4MSwyLjE4NDk3LDE5Ljg4NjExQzM0Ny40NzE1LDI3Ni45NjEwOSwzMDYuNzIwMDYsMzE3LjcxMjU5LDI1Ni40NTA1OSwzMTcuNzEyNTl6Ii8+DQoJPC9nPg0KPC9nPg0KPC9zdmc+DQo=");
+  /* Setting the background properties of no-repeat, align the center, and contain the image in the flex item parent container. */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
+/* Display the "View all Styles" anchor to inline block to allow more control over the box positioning. */
+.link-allstyles {
+  padding: 1.25rem;
+  display: inline-block;
+}
+
+/* Setting the featured li elements to grid to allow full control of the elements. */
+.features li {
+  display: grid;
+  /* Applying relative positioning to adjust element positioning more accurately without affecting surrounding elements. */
+  position: relative;
+  /* Place the list item contents and children elements in the center. */
+  place-content: center;
+  /* Set minimum height of the list item grid items. */
+  min-height: 8rem;
+  /* Center the element text. */
+  text-align: center;
+  color: var(--light-black);
+}
+
+/* Create a smaller grid within the list item grid parent, so allow control over the content inside the span elements. */
+.features li > span {
+  /* Display grid for more element control. */
+  display: grid;
+  /* Center the content with place-content shorthand, aligns content vertically and horizontally at the same time. */
+  place-content: center;
+  padding: 1rem;
+  /* Add some white space between the span and anchor elements inside the list item grid with a 0.5rem gap. */
+  gap: 0.5rem;
+  /* Add some line spacing for additonal white space and readibility. */
+  line-height: 1.2;
+  background-color: #302d2b;
+  width: 8rem;
+  height: 5rem;
+  color: var(--light-text);
+}
+
+.features li > span a:hover {
+  color: var(--white);
+}
+
+/* 
+Make each of grid list itema a clickable element. 
+
+The anchor before pseudo element is set to contain empty content with absolute positioning, with a height and width of 100% to allow the entirety of each li element container to become a link element. 
+*/
+.features li > span a::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+}
+
+/* 
+Set a transform on the featured style list item cards, the transform will reduce the grid item size providing the illusion of the element moving inwards, it will allow users to determine that the mouse is hovered on the element correctly. 
+*/
+#styles > .container ul li:hover {
+  transform: scale(0.95);
+}
+
+/* 
+Since the featured styles ul element is set to display grid with three equal columns, I can set each of the list item cards to occupy a single column. 
+
+Featured Card One
+*/
+#styles > .container ul li:nth-of-type(1) {
+  grid-column: 1;
+}
+/* Featured Card Two */
+#styles > .container ul li:nth-of-type(2) {
+  grid-column: 2;
+}
+/* Featured Card Three */
+#styles > .container ul li:nth-of-type(3) {
+  grid-column: 3;
+}
+
+/* 
+Media query to control the featured styles grid elements at a max device width of 1200px, prevent container overflow and adds a responsive feel to the layout.
+*/
+@media screen and (max-width: 1200px) {
+  #styles > .container {
+    padding: 3rem 1rem 4rem 1rem;
+  }
+
+  /* 
+  Set each of the featured style card items to span over the entirety of the specified grid columns, it will allow the items to stack vertically later on since each grid list item will require the full width of the grid container. 
+  */
+  #styles > .container ul li:nth-of-type(1),
+  #styles > .container ul li:nth-of-type(2),
+  #styles > .container ul li:nth-of-type(3) {
+    grid-column: 1 / 4;
+  }
+
+  /* Remove padding on the featured styles aside to prevent smaller screen overflow. */
+  #styles {
+    padding: 0;
+  }
+
+  /* 
+  Assign each featured grid item card its own grid row since each item now occupies grid-columns 1 / 4 
+  
+  This will stack the grid items on top of one another on smaller screens and prevent overflowing a content readibility issues.
+  */
+  #styles > .container ul li:nth-of-type(1) {
+    grid-row: 1;
+  }
+
+  /* Assign the second card to the second row */
+  #styles > .container ul li:nth-of-type(2) {
+    grid-row: 2;
+  }
+
+  /* Assign the third card to the third grid row. */
+  #styles > .container ul li:nth-of-type(3) {
+    grid-row: 3;
+  }
+
+  /* Position the vector background images position in the first and third grid item to appear on the left off the container at a max width of 1200px */
+  #styles > .container ul li:nth-of-type(1),
+  #styles > .container ul li:nth-of-type(3) {
+    background-position: left;
+  }
+
+  /* Position the background vector to thr right of the second grid item at a device width of 1200px, I think it creates a unique feel when scaling down the screen */
+  #styles > .container ul li:nth-of-type(2) {
+    background-position: right;
+  }
+
+  /* Add some slight padding on the featured card list items to allow some white space on smaller screens, more breathing more so the user doesn't feel overwhelmed by the content. */
+  #styles > .container ul li:nth-of-type(1),
+  #styles > .container ul li:nth-of-type(2),
+  #styles > .container ul li:nth-of-type(3) {
+    padding: 2rem;
+  }
+}
+
+/* End of Featured Aside Styles */
+
+/* Start of Footer Primary Footer Styles */
+
+/* Targeting the page footer class, set the footer background color to the dark brown root color declaration,  */
+.page-footer {
+  background-color: var(--dark-brown);
+}
+
+/* Add some white space between the page footer paragraph content */
+.page-footer p:nth-of-type(1) {
+  padding: 6rem 2rem 3rem 2rem;
+  /* Remove the default inline paragraph margins to allow more control of the elements. */
+  margin: 0;
+}
+
+/* Select the direct descendant container element of the page footer, display the content as flex. */
+.page-footer > .container {
+  display: flex;
+  /* Center the content */
+  justify-content: center;
+  /* Allow the flex content to wrap if needed at smaller device widths, this assists in preventing element overflow. */
+  flex-wrap: wrap;
+  /* Stack the flex content vertically. */
+  flex-direction: column;
+  /* Center all container text content and add some white space to the bottom of the page footer container utilizing padding. */
+  text-align: center;
+  padding-bottom: 4rem;
+}
+
+/* Display the page footer unordered list-items to display flex. */
+.page-footer ul {
+  margin: 0 auto;
+  padding-bottom: 2rem;
+  list-style: none;
+  display: flex;
+  /* Allow the flex items to wrap will maintaining center positioning with justify-content */
+  flex-wrap: wrap;
+  justify-content: center;
+  /* Add some white space of the list items utilizing the gap property of 4rem. */
+  gap: 4rem;
+}
+
+/* Add a smooth transition to the page footer anchor elements when hovered. Inheriting the GitHub Header anchor element styles. */
+.page-footer ul li a:hover {
+  transition: 0.3s;
+}
+
+/* End of Footer Primary Footer Styles */
+
+@media screen and (max-width: 600px) {
+  /* Remove the hyphens when the device reaches a max-width of 600px */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    hyphens: none;
+  }
+
+  /* Reduce the header container element size on smaller devices to contain the content a smaller space. */
+  header .container {
+    min-height: 40vh;
+  }
+
+  /*
+  Reduce the font size of the header h1 and h2 elements at very small device widths to prevent overflow and increase text readibility as the text won't wrap down to a new line.  
+  */
+  header .container h1 {
+    font-size: 3rem;
+  }
+
+  header h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Center the header paragraph text content  */
+  header p {
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  /* Reduce the margin and font size of the github star anchor element to appear a bit smaller on mobile to maintain consistent proportions in the layout. */
+  header a.link-github {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+
+  /* Re-align the HTML and CSS download buttons on smaller screens, it had a margin right in desktop view that needed to be removed to correct the alignment. */
+  #files .container > .link-downloadcss {
+    margin-right: 0;
+  }
+
+  /* Widen the currently styled stage anchor buttons when on very small screens, 600px */
+  .profile ul li {
+    width: 10rem;
+  }
+}
+
+/* Reduce the primary h1 heading element when the screen width is very small at a max width of 380 pixels. I wanted to keep the heading on one line throughout the entirety of the layout rather than the heading overflowing or jumping down another line. */
+@media screen and (max-width: 380px) {
+  header .container h1 {
+    font-size: 2.4rem;
+  }
+}
