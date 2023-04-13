@@ -437,7 +437,7 @@ article:nth-of-type(3) {
 
 /* Using a combinator selector, add some bottom padding to the about and guidelines article content sections. Needed some white space. */
 #about, #guidelines {
-  padding-bottom: 8rem;
+  padding-bottom: 7rem;
 }
 
 /* Target the h2 elements of the first three primary article elements, setting a top margin for white space between sections of content. */
